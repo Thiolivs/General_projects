@@ -48,9 +48,18 @@ router.delete('/delete/:id',(req,res)=>{
     const index = products.findIndex((prod)=> prod.id == idParam);
     products.splice(index, 1);
     res.status(201).send('Produto removido com sucesso');
+})
 
 
-
+router.put('/update/:id',(req,res)=>{
+    const idParam = req.params.id;
+    const editProduct = req.body;
+    const index = products.findIndex((prod)=> prod.id == idParam);
+    products[index] = {
+        ...products[index],
+        ...editProduct
+    }
+    res.status(201).send('Produto atualizado com sucesso');
 })
 
 module.exports = router;
